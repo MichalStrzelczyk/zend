@@ -73,3 +73,14 @@ var_dump(
     (array) $value,    // ['0x00000f']
     (object) $value    // \stdClass {scalar='0x00000f'}
 );
+
+$value = '20e2';
+
+var_dump(
+    (int) $value,      // 2000
+    (bool) $value,     // true
+    (float) $value,    // 2000.0
+    (array) $value,    // ['20e2']
+    (object) $value    // \stdClass {scalar='20e2'}
+);
+
