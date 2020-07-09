@@ -6,6 +6,9 @@ $name = 'John Snow';
 var_dump(
     '$name', // '$name
     $name[0],   // J
+    $name[-1],  // notice Uninitialized string offset: 9999
+    $name[-11],  // ''
+    $name[9999],  // notice Uninitialized string offset: 9999
     $name{3},   // n
     //${name},  //John Snow + warning
     ${'name'},  //John Snow
@@ -18,6 +21,7 @@ var_dump(
     "$name[0]", // J
     "$name{0}", // "John Snow{0}"
 );
+
 
 $user = new \stdClass();
 $user->name = 'John';
@@ -88,6 +92,7 @@ var_dump(
     'a' > 1 ,// false
     '' > 'a', //false
     '!' < '1', //true
+    'ź' > '~śśśśś sdasd ad sas dsad sa' // true
 );
 
 // https://unicode-table.com/en/#basic-latin
@@ -98,3 +103,26 @@ var_dump(
     \strpos($sentence, 'Snow'), // 5
     array_search('Snow', ['John', 'Snow']) //1
 );
+
+
+//Escaped characters
+
+var_dump("\t This is first paragraph. \r\n This is \f second. \v\v end.");
+
+/*
+
+\n	linefeed (LF or 0x0A (10) in ASCII)
+\r	carriage return (CR or 0x0D (13) in ASCII)
+\t	horizontal tab (HT or 0x09 (9) in ASCII)
+\v	vertical tab (VT or 0x0B (11) in ASCII) (since PHP 5.2.5)
+\e	escape (ESC or 0x1B (27) in ASCII) (since PHP 5.4.4)
+\f	form feed (FF or 0x0C (12) in ASCII) (since PHP 5.2.5)
+\\	backslash
+\$	dollar sign
+\"	double-quote
+\[0-7]{1,3}	the sequence of characters matching the regular expression is a character in octal notation, which silently overflows to fit in a byte (e.g. "\400" === "\000")
+\x[0-9A-Fa-f]{1,2}	the sequence of characters matching the regular expression is a character in hexadecimal notation
+\u{[0-9A-Fa-f]+}	the sequence of characters matching the regular expression is a Unicode codepoint, which will be output to the string as that codepoint's UTF-8 representation (added in PHP 7.0.0)
+
+*/
+
